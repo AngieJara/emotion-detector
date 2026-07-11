@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Emotion Detector</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        max-width: 700px;
+        margin: 40px auto;
+        padding: 20px;
+      }
+      form {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+      }
+      textarea {
+        min-height: 120px;
+        padding: 10px;
+      }
+      button {
+        width: 180px;
+        padding: 10px;
+        cursor: pointer;
+      }
+      .result {
+        margin-top: 20px;
+        padding: 12px;
+        border: 1px solid #ddd;
+        border-radius: 6px;
+      }
+      .error {
+        color: red;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Emotion Detector</h1>
+    <p>Enter a sentence to analyze its emotions.</p>
+    <form method="POST">
+      <textarea name="text_to_analyse" placeholder="Type text here..."></textarea>
+      <button type="submit">Analyze</button>
+    </form>
+
+    {% if error_message %}
+    <div class="error">{{ error_message }}</div>
+    {% endif %}
+
+    {% if dominant_emotion is not none %}
+    <div class="result">
+      <p><strong>Anger:</strong> {{ anger }}</p>
+      <p><strong>Disgust:</strong> {{ disgust }}</p>
+      <p><strong>Fear:</strong> {{ fear }}</p>
+      <p><strong>Joy:</strong> {{ joy }}</p>
+      <p><strong>Sadness:</strong> {{ sadness }}</p>
+      <p><strong>Dominant Emotion:</strong> {{ dominant_emotion }}</p>
+    </div>
+    {% endif %}
+
+    <script src="{{ url_for('static', filename='mywebscript.js') }}"></script>
+  </body>
+</html>
